@@ -1,0 +1,38 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+#if [ -f /boot/uboot/CANline ] ; then
+#echo "[File Found]"
+#su -c "rm /home/ubuntu/can-j1939-utils/CANline"
+#su -c "cp /boot/uboot/CANline /home/ubuntu/can-j1939-utils/"
+#else
+#echo "[File Not Found]"
+#fi
+#su -c "echo BB-DCAN1 > /sys/devices/bone_capemgr.*/slots"
+su -c "ip link set can0 up type can bitrate 250000"
+#su -c "modprobe can-j1939"
+su -c "ip link set can0 j1939 on"
+su -c "ifconfig can0 up"
+#su -c "ip addr add j1939 0xF9 dev can0"
+#su -c "/home/ubuntu/can-j1939-utils/./CANline"
+
+
+#su -c "ifconfig can0 down"
+#su -c "echo BB-DCAN1 > /sys/devices/bone_capemgr.*/slots"
+#su -c "ip link set can0 up type can bitrate 250000"
+#su -c "ip link set can0 j1939 on"
+#su -c "ifconfig can0 up"
+
+
+
+exit 0
